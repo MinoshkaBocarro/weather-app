@@ -20,13 +20,7 @@ async function getWeather(city) {
   const location = extractLocationData(dataArr);
   const current = extractCurrentData(dataArr);
   const { forecast, hourly } = extractForecastData(dataArr, location.time);
-  return { current, forecast, hourly };
+  return { current, location, forecast, hourly };
 }
 
-function handleError(fn) {
-  return (...params) => {
-    fn(...params).catch((err) => {
-      console.error('Alert!', err);
-    });
-  };
-}
+export { checkCity, getWeather };
