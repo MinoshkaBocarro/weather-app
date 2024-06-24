@@ -136,13 +136,13 @@ export default [
         },
       ],
       'arrow-parens': ['error', 'always'],
-      'arrow-body-style': [
-        'error',
-        'as-needed',
-        {
-          requireReturnForObjectLiteral: false,
-        },
-      ],
+      // 'arrow-body-style': [
+      //   'error',
+      //   'as-needed',
+      //   {
+      //     requireReturnForObjectLiteral: false,
+      //   },
+      // ],
       'no-confusing-arrow': [
         'error',
         {
