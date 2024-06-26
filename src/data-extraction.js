@@ -70,8 +70,17 @@ function extractHourlyForecast(forecastArr, time) {
   const secondHours = secondDayArr.slice(0, index);
 
   const twentyFourHours = [...firstHours, ...secondHours];
+  const options = {
+    hour12: true,
+    hour: 'numeric',
+  };
+  const intDateFormat = new Intl.DateTimeFormat(undefined, options);
+
   const reducedHours = twentyFourHours.map((hour) => {
+    const currentHour = hour.time;
+    const formattedHour = intDateFormat.format(new Date(currentHour));
     return {
+      hour: formattedHour,
       tempC: hour.temp_c,
       tempF: hour.temp_f,
       precipitationMm: hour.precip_mm,

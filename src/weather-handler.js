@@ -1,14 +1,6 @@
 import { Weather } from './components';
 import { checkCity, getWeather } from './processing';
 
-function handleError(fn) {
-  return (...params) => {
-    fn(...params).catch((err) => {
-      console.error('Alert!', err);
-    });
-  };
-}
-
 const weatherList = [];
 
 async function createNewWeather(city) {
@@ -20,20 +12,14 @@ async function createNewWeather(city) {
     location,
   });
   weatherList.push(newWeatherComponent);
-  console.log(weatherList);
 }
-
-const createNewWeatherH = handleError(createNewWeather);
 
 async function searchCity(city) {
   const { numOfCities, cities } = await checkCity(city);
-  console.log(numOfCities);
   if (numOfCities > 1) {
-    console.log(cities);
-    // call on dom here to show city options
-  } else {
-    createNewWeatherH(city);
+    return cities;
   }
+  return 'One city';
 }
 
-const searchCityH = handleError(searchCity);
+export { createNewWeather, searchCity, weatherList };
