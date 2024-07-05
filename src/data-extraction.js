@@ -14,9 +14,9 @@ function extractLocationData(dataArr) {
 }
 
 function extractCurrentData(dataArr) {
+  console.log(dataArr);
   const {
     current: {
-      air_quality: { pm2_5: airQuality },
       condition: { text: conditionText, icon: conditionIcon },
       temp_c: tempC,
       temp_f: tempF,
@@ -25,32 +25,34 @@ function extractCurrentData(dataArr) {
     },
   } = dataArr;
   const current = {
-    airQuality,
     conditionText,
     conditionIcon,
-    tempC,
-    tempF,
+    tempC: Math.round(parseInt(tempC, 10)),
+    tempF: Math.round(parseInt(tempF, 10)),
     uv,
     humidity,
   };
   return current;
 }
 
-function extractDayForecast(day) {
+function extractDayForecast(day, date) {
   const {
     mintemp_c: minTempC,
     mintemp_f: minTempF,
     maxtemp_c: maxTempC,
     maxtemp_f: maxTempF,
-    totalprecip_mm: precipitationMm,
+    daily_chance_of_rain: precipitation,
     condition: { text: conditionText, icon: conditionIcon },
   } = day;
+  const weekdate = new Date(date);
+  const dayOfWeek = weekdate.getDay();
   const dayCondensed = {
-    minTempC,
-    minTempF,
-    maxTempC,
-    maxTempF,
-    precipitationMm,
+    dayOfWeek,
+    minTempC: Math.round(parseInt(minTempC, 10)),
+    minTempF: Math.round(parseInt(minTempF, 10)),
+    maxTempC: Math.round(parseInt(maxTempC, 10)),
+    maxTempF: Math.round(parseInt(maxTempF, 10)),
+    precipitation: Math.round(parseInt(precipitation, 10)),
     conditionText,
     conditionIcon,
   };
@@ -81,21 +83,21 @@ function extractHourlyForecast(forecastArr, time) {
     const formattedHour = intDateFormat.format(new Date(currentHour));
     return {
       hour: formattedHour,
-      tempC: hour.temp_c,
-      tempF: hour.temp_f,
-      precipitationMm: hour.precip_mm,
+      tempC: Math.round(parseInt(hour.temp_c, 10)),
+      tempF: Math.round(parseInt(hour.temp_f, 10)),
+      precipitation: Math.round(parseInt(hour.chance_of_rain, 10)),
       conditionText: hour.condition.text,
       conditionIcon: hour.condition.icon,
     };
   });
-  return { hourly: reducedHours };
+  return reducedHours;
 }
 
 function extractForecastData(dataArr, time) {
   const forecastArr = dataArr.forecast.forecastday;
   const forecast = {};
   forecastArr.forEach((day, index) => {
-    forecast[`day${index}`] = extractDayForecast(day.day);
+    forecast[index] = extractDayForecast(day.day, day.date);
   });
   const hourly = extractHourlyForecast(forecastArr, time);
   return { forecast, hourly };

@@ -1,3 +1,4 @@
+import { populateApp } from './app-population';
 import { createNewWeather, searchCity } from './weather-handler';
 
 // error handler
@@ -8,6 +9,8 @@ function handleError(fn) {
     });
   };
 }
+
+// to do: store toggle value
 
 const form = document.querySelector('form');
 const dropDown = document.querySelector('.drop-down');
@@ -55,6 +58,6 @@ const processForm = handleError(processFormUH);
 
 form.addEventListener('formdata', processForm);
 
-createNewWeather('melbourne').then(() => {
+createNewWeather('london').then(() => {
   populateApp();
 });
