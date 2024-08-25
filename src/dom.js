@@ -58,6 +58,6 @@ const processForm = handleError(processFormUH);
 
 form.addEventListener('formdata', processForm);
 
-createNewWeather('london').then(() => {
+createNewWeather('melbourne').then(() => {
   populateApp();
 });

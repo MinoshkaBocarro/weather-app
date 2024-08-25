@@ -102,7 +102,7 @@ function populateForecast(weather) {
 function populateApp() {
   const currentCity = weatherList[0];
 
-  const cityPlacard = document.getElementById('city');
+  const cityPlacard = document.querySelector('.city');
   cityPlacard.textContent = currentCity.location.cityName;
 
   populateCurrent(currentCity.current);
