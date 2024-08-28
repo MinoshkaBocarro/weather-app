@@ -16,7 +16,8 @@ const form = document.querySelector('form');
 const dropDown = document.querySelector('.drop-down');
 
 async function selectCityUH(e) {
-  const cityName = e.target.dataset.country;
+  console.log(e.target);
+  const cityName = e.target.dataset.city;
   await createNewWeather(cityName);
   populateApp();
   dropDown.replaceChildren();
@@ -27,9 +28,10 @@ const selectCity = handleError(selectCityUH);
 
 function showCityDropdown(cities) {
   cities.forEach((city) => {
+    console.log(city);
     const cityListItem = document.createElement('li');
-    cityListItem.textContent = `${city.region}, ${city.country}`;
-    cityListItem.dataset.country = `${city.country}`;
+    cityListItem.textContent = `${city.name}, ${city.region}, ${city.country}`;
+    cityListItem.dataset.city = `${city.name}`;
     cityListItem.addEventListener('click', selectCity);
     dropDown.append(cityListItem);
   });
@@ -46,6 +48,7 @@ async function processFormUH(e) {
   e.preventDefault();
   const cityName = e.formData.get('city');
   const searchResult = await searchCity(cityName);
+  console.log(searchResult);
   if (searchResult === 'One city') {
     createNewWeather(cityName);
     form.reset();

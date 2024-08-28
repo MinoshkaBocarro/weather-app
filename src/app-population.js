@@ -24,7 +24,7 @@ function populateCurrent(currentWeather) {
   const conditionIcon = document.createElement('img');
   conditionIcon.src = currentWeather.conditionIcon;
   conditionIcon.alt = currentWeather.conditionText;
-  conditionIconPlacard.append(conditionIcon);
+  conditionIconPlacard.replaceChildren(conditionIcon);
 
   const airQualityPlacard = current.querySelector('.air-quality');
   airQualityPlacard.textContent = currentWeather.airQuality;
@@ -49,7 +49,7 @@ function populateHourly(weather) {
     const conditionIcon = document.createElement('img');
     conditionIcon.src = hourWeather.conditionIcon;
     conditionIcon.alt = hourWeather.conditionText;
-    conditionIconPlacard.append(conditionIcon);
+    conditionIconPlacard.replaceChildren(conditionIcon);
 
     const temperaturePlacard = hour.querySelector('.temperature');
     if (checkTemperatureToggle()) {
@@ -76,7 +76,7 @@ function populateForecast(weather) {
     const conditionIcon = document.createElement('img');
     conditionIcon.src = dayWeather.conditionIcon;
     conditionIcon.alt = dayWeather.conditionText;
-    conditionIconPlacard.append(conditionIcon);
+    conditionIconPlacard.replaceChildren(conditionIcon);
 
     const temperatureMaxPlacard = day.querySelector('.temperature-max');
     if (checkTemperatureToggle()) {

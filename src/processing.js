@@ -9,6 +9,7 @@ async function checkCity(city) {
   const cityArr = await getSearchData(city);
   const numOfCities = cityArr.length;
   const cities = cityArr.map((city) => ({
+    name: city.name,
     region: city.region,
     country: city.country,
   }));

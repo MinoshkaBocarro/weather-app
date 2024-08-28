@@ -4,6 +4,7 @@ import { checkCity, getWeather } from './processing';
 const weatherList = [];
 
 async function createNewWeather(city) {
+  weatherList.pop();
   const { current, forecast, hourly, location } = await getWeather(city);
   const newWeatherComponent = new Weather({
     current,
