@@ -13,6 +13,7 @@ html {
   box-sizing: border-box;
   font-size: 2.2rem;
   font-family: var(--font-stack);
+  color: white;
 }
 
 *,
@@ -22,11 +23,11 @@ html {
 }
 
 body {
-  background-color: rgb(157, 245, 255);
+  background-color: rgb(92, 239, 255);
 }
 
 .container > div {
-  background: rgba(0, 0, 0, 0.23);
+  background: rgba(0, 0, 0, 0.619);
 }
 
 .container {

@@ -14,10 +14,10 @@ function extractLocationData(dataArr) {
 }
 
 function extractCurrentData(dataArr) {
-  console.log(dataArr);
   const {
     current: {
       condition: { text: conditionText, icon: conditionIcon },
+      is_day: isDay,
       temp_c: tempC,
       temp_f: tempF,
       uv,
@@ -27,6 +27,7 @@ function extractCurrentData(dataArr) {
   const current = {
     conditionText,
     conditionIcon,
+    isDay,
     tempC: Math.round(parseInt(tempC, 10)),
     tempF: Math.round(parseInt(tempF, 10)),
     uv,

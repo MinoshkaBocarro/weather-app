@@ -1,3 +1,4 @@
+import { findGif } from './gif-search';
 import { weatherList } from './weather-handler';
 
 function checkTemperatureToggle() {
@@ -99,11 +100,41 @@ function populateForecast(weather) {
   });
 }
 
+async function populateBackground(conditionText, day) {
+  console.log(conditionText);
+  console.log(day);
+  const background = document.querySelector('body');
+  const gifId = findGif(conditionText, day);
+  try {
+    const response = await fetch(
+      `https://api.giphy.com/v1/gifs/${gifId}?api_key=R9KqVBSJVlfoC24CoIs1yT42ktFO8ptH&rating=g`,
+      { mode: 'cors' },
+    );
+
+    const dataInfo = await response.json();
+
+    if (dataInfo.data.length === 0) {
+      throw new Error('No gifs found');
+    } else {
+      const gif = dataInfo.data.images.original.url;
+      background.style.cssText = `background:center / cover no-repeat rgb(157, 245, 255) url("${gif}");`;
+    }
+  } catch (error) {
+    console.log(error);
+    background.style.cssText = 'background-color: rgb(157, 245, 255);';
+  }
+}
+
 function populateApp() {
   const currentCity = weatherList[0];
 
   const cityPlacard = document.querySelector('.city');
   cityPlacard.textContent = currentCity.location.cityName;
+
+  populateBackground(
+    currentCity.current.conditionText,
+    currentCity.current.isDay.toString(),
+  );
 
   populateCurrent(currentCity.current);
 
