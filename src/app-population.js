@@ -100,11 +100,9 @@ function populateForecast(weather) {
   });
 }
 
-async function populateBackground(conditionText, day) {
-  console.log(conditionText);
-  console.log(day);
+async function populateBackground(code, day) {
   const background = document.querySelector('body');
-  const gifId = findGif(conditionText, day);
+  const gifId = findGif(code, day);
   try {
     const response = await fetch(
       `https://api.giphy.com/v1/gifs/${gifId}?api_key=R9KqVBSJVlfoC24CoIs1yT42ktFO8ptH&rating=g`,
@@ -132,7 +130,7 @@ function populateApp() {
   cityPlacard.textContent = currentCity.location.cityName;
 
   populateBackground(
-    currentCity.current.conditionText,
+    currentCity.current.conditionCode.toString(),
     currentCity.current.isDay.toString(),
   );
 
