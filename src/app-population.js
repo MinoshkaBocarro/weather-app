@@ -28,13 +28,13 @@ function populateCurrent(currentWeather) {
   conditionIconPlacard.replaceChildren(conditionIcon);
 
   const airQualityPlacard = current.querySelector('.air-quality');
-  airQualityPlacard.textContent = currentWeather.airQuality;
+  airQualityPlacard.textContent = `AQI: ${currentWeather.airQuality}`;
 
   const humidityPlacard = current.querySelector('.humidity');
-  humidityPlacard.textContent = currentWeather.humidity;
+  humidityPlacard.textContent = `Humidity: ${currentWeather.humidity}%`;
 
   const uvPlacard = current.querySelector('.uv');
-  uvPlacard.textContent = currentWeather.uv;
+  uvPlacard.textContent = `UV: ${currentWeather.uv}`;
 }
 
 function populateHourly(weather) {

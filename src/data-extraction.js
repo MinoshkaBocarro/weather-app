@@ -21,6 +21,7 @@ function extractCurrentData(dataArr) {
         icon: conditionIcon,
         code: conditionCode,
       },
+      air_quality: { ['us-epa-index']: airQualityIndex },
       is_day: isDay,
       temp_c: tempC,
       temp_f: tempF,
@@ -28,16 +29,41 @@ function extractCurrentData(dataArr) {
       humidity,
     },
   } = dataArr;
+  let airQuality;
+  switch (airQualityIndex) {
+    case 1:
+      airQuality = 'Good';
+      break;
+    case 2:
+      airQuality = 'Moderate';
+      break;
+    case 3:
+      airQuality = 'Unhealthy for sensitive group';
+      break;
+    case 4:
+      airQuality = 'Unhealthy';
+      break;
+    case 5:
+      airQuality = 'Very Unhealthy';
+      break;
+    case 6:
+      airQuality = 'Hazardous';
+      break;
+    default:
+      break;
+  }
   const current = {
     conditionText,
     conditionIcon,
     conditionCode,
+    airQuality,
     isDay,
     tempC: Math.round(parseInt(tempC, 10)),
     tempF: Math.round(parseInt(tempF, 10)),
     uv,
     humidity,
   };
+  console.log(current);
   return current;
 }
 

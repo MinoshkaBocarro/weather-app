@@ -22,28 +22,33 @@ html {
   box-sizing: inherit;
 }
 
+li {
+  list-style: none;
+}
+
 body {
   background-color: rgb(92, 239, 255);
 }
 
-.container > div {
+.background {
   background: rgba(0, 0, 0, 0.619);
 }
 
 .container {
   display: grid;
   grid-template-rows:
-    minmax(min-content, 6vh) minmax(min-content, 7vh) minmax(min-content, 32vh)
+    minmax(min-content, 6vh) minmax(min-content, 7vh) minmax(min-content, 36vh)
     minmax(min-content, 10vh) minmax(min-content, 32vh);
   grid-template-columns:
-    minmax(12px, 10vw) minmax(150px, 15vw) minmax(150px, 15vw) 10vw
-    minmax(150px, 15vw) minmax(150px, 15vw) minmax(12px, 10vw);
+    minmax(12px, 10vw) minmax(150px, 17vw) minmax(150px, 17vw) 12vw
+    minmax(150px, 17vw) minmax(150px, 17vw) minmax(12px, 10vw);
   grid-template-areas:
     '. . alert alert alert interaction interaction'
-    '. . . . . . .'
+    '. . . . . . toggle'
     '. . current current current . .'
     '. . . . . . .'
     '. hourly hourly . forecast forecast .';
+  gap: 1px;
   padding-top: 3vh;
   padding-bottom: 3vh;
   padding-left: 3vw;
@@ -55,13 +60,11 @@ body {
 
 #alerts {
   grid-area: alert;
-  background: none;
 }
 
 #interaction {
   grid-area: interaction;
   font-size: 0.6rem;
-  background: none;
 }
 
 #interaction form {
@@ -78,6 +81,7 @@ body {
 #interaction input,
 #interaction button {
   height: min-content;
+  color: #000;
 }
 
 #interaction .relative {
@@ -86,6 +90,13 @@ body {
 
 #interaction .drop-down {
   position: absolute;
+  background-color: rgba(133, 128, 128, 0.619);
+}
+
+#interaction .drop-down li {
+  border-bottom: black solid 1px;
+  border-right: black solid 1px;
+  border-left: black solid 1px;
 }
 
 #interaction button {
@@ -113,7 +124,7 @@ form {
     'air image'
     'humidity image'
     'uv image';
-  grid-template-rows: 20% 5% repeat(5, 15%);
+  grid-template-rows: 20% 5% 15% 22% repeat(3, 13%);
   font-size: 0.9rem;
   padding: 5px;
 }
@@ -128,31 +139,37 @@ form {
 #current .condition-text {
   grid-area: condition;
   justify-self: center;
+  overflow: scroll;
 }
 
 #current .temperature {
   grid-area: temperature;
   justify-self: center;
+  overflow: scroll;
 }
 
 #current .condition-icon {
   grid-area: image;
   justify-self: center;
+  overflow: scroll;
 }
 
 #current .air-quality {
   grid-area: air;
   justify-self: center;
+  overflow: scroll;
 }
 
 #current .humidity {
   grid-area: humidity;
   justify-self: center;
+  overflow: scroll;
 }
 
 #current .uv {
   grid-area: uv;
   justify-self: center;
+  overflow: scroll;
 }
 
 #hourly {
