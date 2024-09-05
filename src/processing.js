@@ -12,12 +12,14 @@ async function checkCity(city) {
     name: city.name,
     region: city.region,
     country: city.country,
+    url: city.url,
   }));
   return { numOfCities, cities };
 }
 
 async function getWeather(city) {
   const dataArr = await getWeatherData(city);
+  console.log(dataArr);
   const location = extractLocationData(dataArr);
   const current = extractCurrentData(dataArr);
   const { forecast, hourly } = extractForecastData(dataArr, location.time);

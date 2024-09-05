@@ -26,10 +26,11 @@ async function selectCityUH(e) {
 const selectCity = handleError(selectCityUH);
 
 function showCityDropdown(cities) {
+  dropDown.replaceChildren();
   cities.forEach((city) => {
     const cityListItem = document.createElement('li');
     cityListItem.textContent = `${city.name}, ${city.region}, ${city.country}`;
-    cityListItem.dataset.city = `${city.name}`;
+    cityListItem.dataset.city = `${city.url}`;
     cityListItem.addEventListener('click', selectCity);
     dropDown.append(cityListItem);
   });
