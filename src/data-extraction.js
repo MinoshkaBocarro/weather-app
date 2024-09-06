@@ -14,6 +14,14 @@ function extractLocationData(dataArr) {
 }
 
 function extractCurrentData(dataArr) {
+  let alertMessages;
+  if (dataArr.alerts.alert.length > 0) {
+    alertMessages = dataArr.alerts.alert.map((currentAlert) => {
+      return currentAlert.event;
+    });
+  } else {
+    alertMessages = 'no alert';
+  }
   const {
     current: {
       condition: {
@@ -53,6 +61,7 @@ function extractCurrentData(dataArr) {
       break;
   }
   const current = {
+    alertMessages,
     conditionText,
     conditionIcon,
     conditionCode,
@@ -63,7 +72,6 @@ function extractCurrentData(dataArr) {
     uv,
     humidity,
   };
-  console.log(current);
   return current;
 }
 

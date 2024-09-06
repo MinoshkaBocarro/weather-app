@@ -60,6 +60,10 @@ body {
 
 #alerts {
   grid-area: alert;
+  font-size: 0.6rem;
+  align-content: center;
+  text-align: center;
+  color: rgb(225, 63, 63);
 }
 
 #interaction {

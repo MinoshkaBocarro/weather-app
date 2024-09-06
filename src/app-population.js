@@ -9,6 +9,23 @@ function checkTemperatureToggle() {
   return false;
 }
 
+function populateAlert(alertMessage) {
+  const alertPlacard = document.getElementById('alerts');
+  alertPlacard.replaceChildren();
+  alertPlacard.classList.remove('background');
+  if (alertMessage !== 'no alert') {
+    alertPlacard.classList.add('background');
+    const alertHeading = document.createElement('li');
+    alertHeading.textContent = 'Alerts:';
+    alertPlacard.append(alertHeading);
+    alertMessage.forEach((alert) => {
+      const li = document.createElement('li');
+      li.textContent = alert;
+      alertPlacard.append(li);
+    });
+  }
+}
+
 function populateCurrent(currentWeather) {
   const current = document.getElementById('current');
   const conditionTextPlacard = current.querySelector('.condition-text');
@@ -133,6 +150,8 @@ function populateApp() {
     currentCity.current.conditionCode.toString(),
     currentCity.current.isDay.toString(),
   );
+
+  populateAlert(currentCity.current.alertMessages);
 
   populateCurrent(currentCity.current);
 
