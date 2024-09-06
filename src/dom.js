@@ -26,7 +26,6 @@ async function selectCityUH(e) {
 const selectCity = handleError(selectCityUH);
 
 function showCityDropdown(cities) {
-  dropDown.replaceChildren();
   cities.forEach((city) => {
     const cityListItem = document.createElement('li');
     cityListItem.textContent = `${city.name}, ${city.region}, ${city.country}`;
@@ -40,6 +39,7 @@ const formSubmit = document.querySelector('form button');
 
 formSubmit.addEventListener('click', (e) => {
   e.preventDefault();
+  dropDown.replaceChildren();
   new FormData(form);
 });
 
@@ -60,6 +60,6 @@ const processForm = handleError(processFormUH);
 
 form.addEventListener('formdata', processForm);
 
-createNewWeather('New Orleans').then(() => {
+createNewWeather('Melbourne').then(() => {
   populateApp();
 });
