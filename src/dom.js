@@ -48,7 +48,8 @@ async function processFormUH(e) {
   const cityName = e.formData.get('city');
   const searchResult = await searchCity(cityName);
   if (searchResult === 'One city') {
-    createNewWeather(cityName);
+    await createNewWeather(cityName);
+    populateApp();
     form.reset();
   } else {
     showCityDropdown(searchResult);
@@ -59,6 +60,6 @@ const processForm = handleError(processFormUH);
 
 form.addEventListener('formdata', processForm);
 
-createNewWeather('melbourne').then(() => {
+createNewWeather('New Orleans').then(() => {
   populateApp();
 });
