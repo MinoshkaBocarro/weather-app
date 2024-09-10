@@ -32,6 +32,8 @@ function populateCurrent(currentWeather) {
   conditionTextPlacard.textContent = currentWeather.conditionText;
 
   const temperaturePlacard = current.querySelector('.temperature');
+  temperaturePlacard.dataset.c = `${currentWeather.tempC}°C`;
+  temperaturePlacard.dataset.f = `${currentWeather.tempF}°F`;
   if (checkTemperatureToggle()) {
     temperaturePlacard.textContent = `${currentWeather.tempC}°C`;
   } else {
@@ -70,6 +72,8 @@ function populateHourly(weather) {
     conditionIconPlacard.replaceChildren(conditionIcon);
 
     const temperaturePlacard = hour.querySelector('.temperature');
+    temperaturePlacard.dataset.c = `${hourWeather.tempC}°C`;
+    temperaturePlacard.dataset.f = `${hourWeather.tempF}°F`;
     if (checkTemperatureToggle()) {
       temperaturePlacard.textContent = `${hourWeather.tempC}°C`;
     } else {
@@ -97,6 +101,8 @@ function populateForecast(weather) {
     conditionIconPlacard.replaceChildren(conditionIcon);
 
     const temperatureMaxPlacard = day.querySelector('.temperature-max');
+    temperatureMaxPlacard.dataset.c = `${dayWeather.maxTempC}°C`;
+    temperatureMaxPlacard.dataset.f = `${dayWeather.maxTempF}°F`;
     if (checkTemperatureToggle()) {
       temperatureMaxPlacard.textContent = `${dayWeather.maxTempC}°C`;
     } else {
@@ -104,6 +110,8 @@ function populateForecast(weather) {
     }
 
     const temperatureMinPlacard = day.querySelector('.temperature-min');
+    temperatureMinPlacard.dataset.c = `${dayWeather.minTempC}°C`;
+    temperatureMinPlacard.dataset.f = `${dayWeather.minTempF}°F`;
     if (checkTemperatureToggle()) {
       temperatureMinPlacard.textContent = `${dayWeather.minTempC}°C`;
     } else {

@@ -10,8 +10,11 @@ function handleError(fn) {
   };
 }
 
-// to do: store toggle value
+const temperatureToggle = document.querySelector(
+  '#temperature-toggle input[type=checkbox]',
+);
 
+// search bar
 const form = document.querySelector('form');
 const dropDown = document.querySelector('.drop-down');
 
@@ -62,4 +65,27 @@ form.addEventListener('formdata', processForm);
 
 createNewWeather('Melbourne').then(() => {
   populateApp();
+});
+
+// temperature toggle
+function changeAllTemp(tempScale) {
+  const tempArr = document.querySelectorAll('.temperature');
+  tempArr.forEach((temp) => {
+    const currentTemp = temp;
+    if (tempScale === 'C') {
+      currentTemp.textContent = temp.dataset.c;
+    } else {
+      currentTemp.textContent = temp.dataset.f;
+    }
+  });
+}
+
+temperatureToggle.addEventListener('click', () => {
+  if (temperatureToggle.checked) {
+    changeAllTemp('F');
+    temperatureToggle.dataset.toggle = 'F';
+  } else {
+    changeAllTemp('C');
+    temperatureToggle.dataset.toggle = 'C';
+  }
 });
