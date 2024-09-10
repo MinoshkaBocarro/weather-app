@@ -10,9 +10,30 @@ function handleError(fn) {
   };
 }
 
+// check local storage
+const temperatureScale = document.querySelector('#temperature-toggle');
 const temperatureToggle = document.querySelector(
   '#temperature-toggle input[type=checkbox]',
 );
+if (localStorage.getItem('temperatureScale')) {
+  const newScale = JSON.parse(localStorage.getItem('temperatureScale'));
+  temperatureScale.dataset.toggle = newScale;
+  if (newScale === 'F') {
+    temperatureToggle.checked = true;
+  }
+}
+if (localStorage.getItem('weatherList')) {
+  const pastWeather = JSON.parse(localStorage.getItem('weatherList'));
+  const preferredLocation = pastWeather[0].location;
+  const preferredCity = `${preferredLocation.cityName} ${preferredLocation.region} ${preferredLocation.country}`;
+  createNewWeather(preferredCity).then(() => {
+    populateApp();
+  });
+} else {
+  createNewWeather('Melbourne').then(() => {
+    populateApp();
+  });
+}
 
 // search bar
 const form = document.querySelector('form');
@@ -63,10 +84,6 @@ const processForm = handleError(processFormUH);
 
 form.addEventListener('formdata', processForm);
 
-createNewWeather('Melbourne').then(() => {
-  populateApp();
-});
-
 // temperature toggle
 function changeAllTemp(tempScale) {
   const tempArr = document.querySelectorAll('.temperature');
@@ -80,12 +97,18 @@ function changeAllTemp(tempScale) {
   });
 }
 
+function setTempScale(tempScale) {
+  localStorage.setItem('temperatureScale', JSON.stringify(tempScale));
+}
+
 temperatureToggle.addEventListener('click', () => {
   if (temperatureToggle.checked) {
     changeAllTemp('F');
     temperatureToggle.dataset.toggle = 'F';
+    setTempScale('F');
   } else {
     changeAllTemp('C');
     temperatureToggle.dataset.toggle = 'C';
+    setTempScale('C');
   }
 });

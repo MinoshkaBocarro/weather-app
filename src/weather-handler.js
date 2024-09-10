@@ -13,6 +13,7 @@ async function createNewWeather(city) {
     location,
   });
   weatherList.push(newWeatherComponent);
+  localStorage.setItem('weatherList', JSON.stringify(weatherList));
 }
 
 async function searchCity(city) {

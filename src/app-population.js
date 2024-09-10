@@ -142,8 +142,7 @@ async function populateBackground(code, day) {
       const gif = dataInfo.data.images.original.url;
       background.style.cssText = `background:center / cover no-repeat rgb(157, 245, 255) url("${gif}");`;
     }
-  } catch (error) {
-    console.log(error);
+  } catch {
     background.style.cssText = 'background-color: rgb(157, 245, 255);';
   }
 }
