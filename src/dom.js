@@ -1,5 +1,8 @@
 import { populateApp } from './app-population';
+import { addLoader, removeLoader } from './loader';
 import { createNewWeather, searchCity } from './weather-handler';
+
+addLoader();
 
 // error handler
 function handleError(fn) {
@@ -27,10 +30,12 @@ if (localStorage.getItem('weatherList')) {
   const preferredLocation = pastWeather[0].location;
   const preferredCity = `${preferredLocation.cityName} ${preferredLocation.region} ${preferredLocation.country}`;
   createNewWeather(preferredCity).then(() => {
+    removeLoader();
     populateApp();
   });
 } else {
   createNewWeather('Melbourne').then(() => {
+    removeLoader();
     populateApp();
   });
 }
@@ -42,6 +47,7 @@ const dropDown = document.querySelector('.drop-down');
 async function selectCityUH(e) {
   const cityName = e.target.dataset.city;
   await createNewWeather(cityName);
+  removeLoader();
   populateApp();
   dropDown.replaceChildren();
   form.reset();
@@ -64,6 +70,7 @@ const formSubmit = document.querySelector('form button');
 formSubmit.addEventListener('click', (e) => {
   e.preventDefault();
   dropDown.replaceChildren();
+  addLoader();
   new FormData(form);
 });
 
@@ -73,6 +80,7 @@ async function processFormUH(e) {
   const searchResult = await searchCity(cityName);
   if (searchResult === 'One city') {
     await createNewWeather(cityName);
+    removeLoader();
     populateApp();
     form.reset();
   } else {
