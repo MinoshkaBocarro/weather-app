@@ -1,3 +1,5 @@
 # WeatherApp
 
-//Add weatherdata reference
+Weather data and icons from WeatherAPI
+
+Backgrounds from GIPHY
