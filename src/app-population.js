@@ -93,6 +93,10 @@ function populateForecast(weather) {
 
   days.forEach((day, index) => {
     const dayWeather = weather[index];
+    console.log(dayWeather);
+
+    const dayOfWeekPlacard = day.querySelector('.day-of-week');
+    dayOfWeekPlacard.textContent = `${dayWeather.fullDayOfWeek}`;
 
     const conditionIconPlacard = day.querySelector('.condition-icon');
     const conditionIcon = document.createElement('img');

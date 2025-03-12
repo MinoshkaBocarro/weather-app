@@ -86,8 +86,35 @@ function extractDayForecast(day, date) {
   } = day;
   const weekdate = new Date(date);
   const dayOfWeek = weekdate.getDay();
+  let fullDayOfWeek;
+  switch (dayOfWeek) {
+    case 0:
+      fullDayOfWeek = 'Sunday';
+      break;
+    case 1:
+      fullDayOfWeek = 'Monday';
+      break;
+    case 2:
+      fullDayOfWeek = 'Tuesday';
+      break;
+    case 3:
+      fullDayOfWeek = 'Wednesday';
+      break;
+    case 4:
+      fullDayOfWeek = 'Thursday';
+      break;
+    case 5:
+      fullDayOfWeek = 'Friday';
+      break;
+    case 6:
+      fullDayOfWeek = 'Saturday';
+      break;
+    default:
+      break;
+  }
   const dayCondensed = {
     dayOfWeek,
+    fullDayOfWeek,
     minTempC: Math.round(parseInt(minTempC, 10)),
     minTempF: Math.round(parseInt(minTempF, 10)),
     maxTempC: Math.round(parseInt(maxTempC, 10)),

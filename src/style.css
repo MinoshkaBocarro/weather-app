@@ -41,8 +41,8 @@ body {
     minmax(min-content, 6vh) minmax(min-content, 7vh) minmax(min-content, 36vh)
     minmax(min-content, 10vh) minmax(min-content, 32vh);
   grid-template-columns:
-    minmax(12px, 10vw) minmax(150px, 17vw) minmax(150px, 17vw) 12vw
-    minmax(150px, 17vw) minmax(150px, 17vw) minmax(12px, 10vw);
+    minmax(30px, 10vw) minmax(200px, 17vw) minmax(200px, 17vw) 12vw
+    minmax(200px, 17vw) minmax(200px, 17vw) minmax(30px, 10vw);
   grid-template-areas:
     '. . alert alert alert interaction interaction'
     '. . . loader toggle . .'
@@ -262,10 +262,16 @@ form {
 
 .day {
   display: grid;
-  grid-template-rows: 55% 20% 19%;
+  grid-template-rows: 13% 46% 15% 15%;
   justify-content: center;
   justify-items: center;
   gap: 3%;
+  min-width: min-content;
+}
+
+.day-of-week {
+  font-size: 0.75rem;
+  padding-top: 10px;
 }
 
 .condition {
@@ -292,6 +298,10 @@ img {
 .day,
 .hour {
   border: rgba(0, 0, 0, 0.144) 1px solid;
+}
+
+.day:not(:last-child) {
+  border-right-color: white;
 }
 
 .loader.show {
